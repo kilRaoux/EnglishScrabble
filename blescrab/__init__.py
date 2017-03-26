@@ -56,7 +56,7 @@ class Porteur:
         self.scene.nextTurn()
 
         print(self.player,self.scene.etat)
-    def shuffle(self):
+    def shuffle(self,x,y):
         save = [t.lettre for t in self.list_token]
         random.shuffle(save)
         for k in self.list_token:
@@ -74,6 +74,8 @@ class Porteur:
 
         for s in self.savel:
             self.addToken(s)
+        self.scene.target = 0
+        self.scene.etat = "CHOUSE"
         self.update()
     def onClick(self,x,y):
         if self.scene.player == self.player:

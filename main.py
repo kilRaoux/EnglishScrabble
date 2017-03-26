@@ -1,13 +1,18 @@
 """
 ------------------------------------------ English Scrabble ---------------------------------------------
 Note de version:
-0.0.0: MyPyGame debut.
-1.0.0: Premiere version stable du jeu.
-    1.0.1: hotFix
-1.1.0: Ajout:
-    - d'une animation au survole d'un bouton (ici dans les porteur, au survole d'un jeton pour mettre le
-        avant).
-    - de la gestion des cases bonus (mot compte double, triple et lettre compte double, triple).
+    0.0.0: MyPyGame debut.
+    1.0.0: Premiere version stable du jeu.
+        1.0.1: hotFix
+    1.1.0: Ajout:
+        - d'une animation au survole d'un bouton (ici dans les porteur, au survole d'un jeton pour mettre le
+            avant).
+        - de la gestion des cases bonus (mot compte double, triple et lettre compte double, triple).
+        1.1.1: Hotfix : reglement du bug: quand on appuie sur NEXT avec un jeton selectionné cela bloquer le tour
+Bugs connus:
+    si egaliter c'est player 2 qui gagne
+
+----------------------------------------------------------------------------------------------------------
 """
 
 
@@ -19,9 +24,9 @@ from pygame.locals import *
 __version__ = "1.1.0"
 
 
-def goToGame():
+def goToGame(x,y):
     game.scene = scGame
-def goToMenu():
+def goToMenu(x,y):
     game.scene = scMenu
 def loadDico(path="dict.txt"):
     file = open(path)
@@ -41,4 +46,4 @@ scMenu = scm(game,w,h,goToGame)
 
 scGame = Sc_2players(game,w,h,goToMenu,loadDico())
 scGame.addImage("fond","Asset/fond.png")
-game.run(scGame)
+game.run(scMenu)

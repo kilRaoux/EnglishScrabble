@@ -57,7 +57,7 @@ class Sc_2players(Scene):
             self.tourPlayer2()
         else:
             self.tourPlayer1()
-    def next1(self):
+    def next1(self,x,y):
         if self.plt.nb == 0: return
         score = self.check()
         if score:
@@ -70,7 +70,7 @@ class Sc_2players(Scene):
         else:
             self.porteur1.load()
             self.plt.load()
-    def next2(self):
+    def next2(self,x,y):
         if self.plt.nb == 0: return
         score = self.check()
         if score:

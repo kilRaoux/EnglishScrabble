@@ -12,8 +12,7 @@ class Button(GameObject):
         scene.clickItems.append(self)
     def testClick(self,x,y):
         if self.x < x < self.x+self.w and self.y < y < self.y+self.h:
-            try:self.command(x,y)
-            except: self.command()
+            self.command(x,y)
     def testOver(self,x,y):
         self.overCommand(x,y,self.x < x < self.x+self.w and self.y < y < self.y+self.h)
 class CheckButton(Button):
