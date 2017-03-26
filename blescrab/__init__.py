@@ -6,6 +6,7 @@ from blescrab.Token import *
 
 
 class Porteur:
+    abc = list("E" * 12 + "AI" * 9 + "O" * 8 + "RNT" * 6 + "LSU" * 4 + "D" * 4 + "G" * 3 + "BCMP" * 2 + "KJXQZ")
     def __init__(self,scene,x,y,w,h,player = 0):
         self.x,self.y,self.w,self.h = x,y,w,h
         self.dx = self.w//7
@@ -16,7 +17,7 @@ class Porteur:
         self.player = player
         self.scene = scene
         self.targetDraw = []
-        self.abc = list("E"*12+"AI"*9+"O"*8+"RNT"*6+"LSU"*4+"D"*4+"G"*3+"BCMP"*2+"KJXQZ")
+        self.abc = self.__class__.abc
         if player:
             self.fond = Button(scene, pygame.image.load("Asset/porteur.png"), x=x, y=y, width=w, height=h,command=self.onClick,overCommand=self.over)
         else:

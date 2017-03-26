@@ -24,7 +24,16 @@ class Sc_2players(Scene):
         self.checker = Checker(self.plt,self.dic)
         self.totalScore = 0
         self.arrow = GameObject(self,pygame.image.load("Asset/arrow.png"),x=w-810,y=120,width=720,height=250)
-        GameObject(self,pygame.image.load("Asset/blescrab.png"),w/2-400,0,1,800,100)
+        GameObject(self,pygame.image.load("Asset/EnglishScrabble.png"),w/2-300,0,1,600,110)
+        GameObject(self,pygame.image.load("Asset/token__.png"),x=w-800,y=h-270,calque=0,width=750,height=260)
+        self.txtPick = Text(self,"Pick: 0",x=w-790,y=h-260,width=10,height=10,size=30)
+        txt = Text(self, "Pick: 0", x=w - 790, y=h - 230, width=10, height=10, size=30)
+        txt.updateText("A=1 B=3 C=3 D=2 E=1 F=4 G=2 H=4 I=1 J=8 K=5 L=1 ")
+        txt = Text(self, "Pick: 0", x=w - 790, y=h - 180, width=10, height=10, size=30)
+        txt.updateText("M=3 N=1 O=1 P=3 Q=10 R=1 S=1 T=1 U=1 V=4 W=4 ")
+        txt = Text(self, "Pick: 0", x=w - 790, y=h - 120, width=10, height=10, size=30)
+        txt.updateText("W=4 X=8 Y=4 Z=10")
+        self.addCommand(self.pick)
         #Player 1
         self.porteur1 = Porteur(self,x=w - 800,y=200,w=700,h=100,player=1)
         self.score1 = 0
@@ -52,6 +61,8 @@ class Sc_2players(Scene):
         self.bind("e",self.win)
         self.bind("d",self.devMod)
         self.addCommand(self.DragAndDrop)
+    def pick(self):
+        self.txtPick.updateText("pick: {}".format(len(self.porteur1.abc)))
     def devMod(self):
         self.devText1 = Text(self,"DevText:",0,0,100,20,10)
         self.devText2 = Text(self, "etat/player:{}/{}".format(self.etat,self.player), 0, 20, 200, 20,10)
