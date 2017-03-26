@@ -45,6 +45,7 @@ class Porteur:
                     self.list_token[i].move(0,10)
                 self.isOver = -1
     def draw(self):
+        if self.scene.player != self.player: return 0
         print(self.player,self.scene.etat)
         for o in self.targetDraw:
             self.list_token.remove(o)
@@ -56,6 +57,7 @@ class Porteur:
         self.scene.nextTurn()
 
         print(self.player,self.scene.etat)
+        return 1
     def shuffle(self,x,y):
         save = [t.lettre for t in self.list_token]
         random.shuffle(save)
@@ -104,7 +106,7 @@ class Porteur:
                     i = int((x - self.x) // (self.w / 7))
                     self.scene.targetToken = 0
                     self.list_token[i].scale(80,80)
-                    self.list_token[i].goTo(self.x+self.dx*i+10,self.y+10)
+                    self.list_token[i].goTo(self.x+self.dx*i+10,self.y)
                     self.scene.etat = "CHOUSE"
             else:
                 print(self.scene.etat)

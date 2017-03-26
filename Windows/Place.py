@@ -24,6 +24,8 @@ class Place:
         self.activeItems = []
         self.dictKey = {}
         self.end = 1
+        self.fps = 0
+        self.time = 0
         self.clock = pygame.time.Clock()
         self.framerate=framerate
     def update(self):
@@ -50,7 +52,7 @@ class Place:
         self.scene = scene
     def run(self,scene):
         self.scene = scene
-        time_c = time.time()
+        self.time = time.time()
         while 1:
             #print(self.scene)
             for event in pygame.event.get():
@@ -72,6 +74,6 @@ class Place:
             for c in self.scene.event:
                 c.avance()
             self.clock.tick(FRAME_RATE)
-            #print(1/(time.time()-time_c))
-            time_c = time.time()
+            self.fps = 1/(time.time() - self.time)
+            self.time = time.time()
             #pygame.time.delay(int(1000/FRAME_RATE))

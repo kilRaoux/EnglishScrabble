@@ -10,6 +10,8 @@ Note de version:
         - de la gestion des cases bonus (mot compte double, triple et lettre compte double, triple).
         1.1.1: Hotfix : reglement du bug: quand on appuie sur NEXT avec un jeton selectionné cela bloquer le tour
     *1.2.0: Ajout d'un dragAndDrop l'or de la selection d'un jeton.
+        1.2.1: hotFix : On ne peut plus draw quand ce n'est pas notre tour
+            - hotfix : Resolution du bug de retour quand un jeton est selectionné
 Bugs connus:
     si egaliter c'est player 2 qui gagne
 

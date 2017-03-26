@@ -29,10 +29,11 @@ class CheckButton(Button):
     def testClick(self,x,y):
         if self.x < x < self.x+self.w and self.y < y < self.y+self.h:
             if self.etat:
-                self.etat = 0
-                self.setImage(self.image_off)
-                self.cmd_on()
+                if self.cmd_on():
+                    self.etat = 0
+                    self.setImage(self.image_off)
+
             elif self.scene.etat == "CHOUSE":
-                self.etat = 1
-                self.setImage(self.image_on)
-                self.cmd_off()
+                if self.cmd_off():
+                    self.etat = 1
+                    self.setImage(self.image_on)

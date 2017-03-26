@@ -24,13 +24,14 @@ class Sc_2players(Scene):
         self.checker = Checker(self.plt,self.dic)
         self.totalScore = 0
         self.arrow = GameObject(self,pygame.image.load("Asset/arrow.png"),x=w-810,y=120,width=720,height=250)
+        GameObject(self,pygame.image.load("Asset/blescrab.png"),w/2-400,0,1,800,100)
         #Player 1
         self.porteur1 = Porteur(self,x=w - 800,y=200,w=700,h=100,player=1)
         self.score1 = 0
         self.txt1 = Text(self, "Player 1 Score: 0 ", x=w-800, y=140, width=100, height=20)
         self.txt1.updateText("Player 1 : 0")
         self.butDraw1 = CheckButton(self, pygame.image.load("Asset/DRAW.png"), x=w - 800, y=300, width=200,
-                                   height=50, command_off=self.selectDraw, command_on=self.porteur1.draw,
+                                   height=50, command_off=self.selectDraw1, command_on=self.porteur1.draw,
                                    image_on=pygame.image.load("Asset/Draw_on.png"))
         self.butshuffle1 = Button(self, pygame.image.load("Asset/SHUFFLE.png"), x=w - 300, y= 300, width=200,
                                  height=50, command=self.porteur1.shuffle)
@@ -42,21 +43,45 @@ class Sc_2players(Scene):
         self.txt2 = Text(self, "Player 2 Score: 0 ", x=800, y=h-490, width=100, height=20)
         self.txt2.updateText("Player 2 : 0")
         self.butDraw2 = CheckButton(self, pygame.image.load("Asset/DRAW.png"), x=w - 800, y=h - 330, width=200,
-                                      height=50, command_off=self.selectDraw, command_on=self.porteur2.draw,
+                                      height=50, command_off=self.selectDraw2, command_on=self.porteur2.draw,
                                       image_on=pygame.image.load("Asset/Draw_on.png"))
         self.butshuffle2 = Button(self, pygame.image.load("Asset/SHUFFLE.png"), x=w - 300, y=h -330, width=200,
                                   height=50, command=self.porteur2.shuffle)
         self.butNext2 = Button(self, pygame.image.load("Asset/NEXT.png"), x=w - 550, y=h -330, width=200, height=50,
                                command=self.next2)
         self.bind("e",self.win)
+        self.bind("d",self.devMod)
         self.addCommand(self.DragAndDrop)
+    def devMod(self):
+        self.devText1 = Text(self,"DevText:",0,0,100,20,10)
+        self.devText2 = Text(self, "etat/player:{}/{}".format(self.etat,self.player), 0, 20, 200, 20,10)
+        self.devText3 = Text(self, "DevText:", 0, 40, 100, 20,10)
+        self.addCommand(self._devUpdate)
+        self.bind("d", self.devModOff)
+    def _devUpdate(self):
+        self.devText1.updateText("DevMod True".format(self.etat, self.player))
+        self.devText2.updateText("etat/player:{}/{}".format(self.etat,self.player))
+        self.devText3.updateText("fps:{}".format(int(self.master.fps)))
+    def devModOff(self):
+        self.devText1.delete()
+        self.devText2.delete()
+        self.devText3.delete()
+        self.lcommand.remove(self._devUpdate)
+        self.bind("d", self.devMod)
     def DragAndDrop(self):
         if self.targetToken:
             x, y = pygame.mouse.get_pos()
             self.targetToken.goTo(x-20,y-20)
-    def selectDraw(self):
+    def selectDraw1(self):
+        if self.player == 2: return 0
         if self.etat == "CHOUSE":
             self.etat = "SELECT"
+        return 1
+    def selectDraw2(self):
+        if self.player == 1: return 0
+        if self.etat == "CHOUSE":
+            self.etat = "SELECT"
+        return 1
     def nextTurn(self):
         print("next turn")
         if self.player == 1:
@@ -64,6 +89,7 @@ class Sc_2players(Scene):
         else:
             self.tourPlayer1()
     def next1(self,x,y):
+        if self.player == 2: return
         if self.plt.nb == 0: return
         score = self.check()
         if score:
@@ -77,6 +103,7 @@ class Sc_2players(Scene):
             self.porteur1.load()
             self.plt.load()
     def next2(self,x,y):
+        if self.player == 1: return
         if self.plt.nb == 0: return
         score = self.check()
         if score:
@@ -90,12 +117,14 @@ class Sc_2players(Scene):
             self.porteur2.load()
             self.plt.load()
     def tourPlayer1(self):
+        print(self.etat,self.player)
         self.arrow.move(0,-280)
         self.player = 1
         self.porteur1.save()
         self.plt.save()
         self.etat = "CHOUSE"
     def tourPlayer2(self):
+        print(self.etat,self.player)
 
         self.arrow.move(0,280)
         self.player = 2
