@@ -19,6 +19,7 @@ class Sc_2players(Scene):
         self.etat = "CHOUSE"
         self.player = 1
         self.target = ""
+        self.targetToken = 0
         self.turn = 0
         self.checker = Checker(self.plt,self.dic)
         self.totalScore = 0
@@ -48,6 +49,11 @@ class Sc_2players(Scene):
         self.butNext2 = Button(self, pygame.image.load("Asset/NEXT.png"), x=w - 550, y=h -330, width=200, height=50,
                                command=self.next2)
         self.bind("e",self.win)
+        self.addCommand(self.DragAndDrop)
+    def DragAndDrop(self):
+        if self.targetToken:
+            x, y = pygame.mouse.get_pos()
+            self.targetToken.goTo(x-20,y-20)
     def selectDraw(self):
         if self.etat == "CHOUSE":
             self.etat = "SELECT"

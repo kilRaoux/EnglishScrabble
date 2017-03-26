@@ -94,14 +94,17 @@ class Porteur:
                 i = int((x - self.x) // (self.w / 7))
                 if i>=len(self.list_token): return
                 self.scene.target = self.list_token[i]
-                self.list_token[i].move(0,-10)
+                self.list_token[i].scale(40,40)
+                self.scene.targetToken = self.list_token[i]
                 self.scene.etat = "POSE"
             elif self.scene.etat == "POSE":
-                x, y = pygame.mouse.get_pos()
                 i = int((x - self.x) // (self.w / 7))
                 if i>=len(self.list_token): return
                 if self.scene.target == self.list_token[i]:
-                    self.list_token[i].move(0,10)
+                    i = int((x - self.x) // (self.w / 7))
+                    self.scene.targetToken = 0
+                    self.list_token[i].scale(80,80)
+                    self.list_token[i].goTo(self.x+self.dx*i+10,self.y+10)
                     self.scene.etat = "CHOUSE"
             else:
                 print(self.scene.etat)

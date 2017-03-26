@@ -1,14 +1,15 @@
 """
 ------------------------------------------ English Scrabble ---------------------------------------------
 Note de version:
-    0.0.0: MyPyGame debut.
-    1.0.0: Premiere version stable du jeu.
+    * 0.0.0: MyPyGame debut.
+    * 1.0.0: Premiere version stable du jeu.
         1.0.1: hotFix
-    1.1.0: Ajout:
+    * 1.1.0: Ajout:
         - d'une animation au survole d'un bouton (ici dans les porteur, au survole d'un jeton pour mettre le
             avant).
         - de la gestion des cases bonus (mot compte double, triple et lettre compte double, triple).
         1.1.1: Hotfix : reglement du bug: quand on appuie sur NEXT avec un jeton selectionné cela bloquer le tour
+    *1.2.0: Ajout d'un dragAndDrop l'or de la selection d'un jeton.
 Bugs connus:
     si egaliter c'est player 2 qui gagne
 
@@ -21,7 +22,7 @@ from Windows.Place import Place
 from blescrab.Sc_2players import *
 from blescrab.Scene_menu import Scene_menu as scm
 from pygame.locals import *
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 
 def goToGame(x,y):
