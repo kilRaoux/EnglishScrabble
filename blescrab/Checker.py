@@ -13,7 +13,6 @@ class Checker:
         self._LR()
         score = self._checkWords()
         self.list = []
-        print(score)
         return score
     def _checkWords(self):
         def reverse(w):
@@ -47,7 +46,6 @@ class Checker:
                     sL += w.val
                 elif wL != "" and len(wL):
                     self.list.append((wL,sL*uL))
-                    print("L",wL,sL*uL,self.list)
                     wL,sL,uL = "",0,1
                 if self.plt[j, i][0]:
                     w, k = self.plt[j, i]
@@ -63,9 +61,8 @@ class Checker:
                     sR += w.val
                 elif wR != "" and len(wR):
                     self.list.append((wR, sR * uR))
-                    print("R", wR, sR * uR, self.list)
                     wR, sR, uR = "", 0, 1
-            #print(self.list)
+        #print(self.list)
     def _single(self):
         for i in range(14):
             for j in range(14):
